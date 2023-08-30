@@ -1,0 +1,4 @@
+enum ActionTypes {
+  up,
+  down
+}
