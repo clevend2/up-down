@@ -1,0 +1,5 @@
+targets:
+  armv7-linux-androideabi
+  aarch64-linux-android
+command:
+  rustup target install <target>
