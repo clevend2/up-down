@@ -1,3 +1,17 @@
 execs:  
-  flutter_windows_3.13.0-stable
-  rustup-init.exe
+  - flutter_windows_3.13.0-stable
+  - rustup-init.exe
+cargo:
+  - nnapi_sys
+  - cargo-ndk
+python:
+  - https://www.tensorflow.org/install/pip#windows-wsl2_1
+    - pip install --upgrade pip
+    - pip install tensorflow
+docker:
+  - https://www.tensorflow.org/install/docker
+    - docker run -it tensorflow/tensorflow bash
+    for jupyter notebook:
+    - docker run -it -p 8888:8888 tensorflow/tensorflow:nightly-jupyter
+    for specific script:
+      - docker run -it --rm -v $PWD:/tmp -w /tmp tensorflow/tensorflow python ./script.py

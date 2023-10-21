@@ -1,17 +1,20 @@
+# Under construction
+This is, in it's current form, a project I am using for practice. I am not familiar with Flutter nor Dart before this project, and am experimenting with NLP integration.
+
 # Actions
 1. Up = good
 2. Down = bad
 
 # Action attributes
 1. level
-2. talk_about_it
+2. what_happened
   - 200 chars max
-3. really_talk_about_it
+3. talk_about_it
   - full screen
   - no char max
 4. timestamp
 5. device
-6. tokenized_talk_about_it
+6. tokenized_what_happened
   - a list of tokens relating to this action which can be indexed
 7. type
 
@@ -27,7 +30,7 @@
 3. Big || Big big => "Wanna talk about it?" requires confirm prompt to supply "<nope>"
 
 # Action UI integrations
-1. autocomplete suggestions based on previous tokenized_talk_about_it
+1. autocomplete suggestions based on previous tokenized_what_happened
 2. timestamp is close to now? => suggest previous actions from similar timestamps
 3. suggestions from similar times or autocomplete are available? => allow "negating" an up or down that was not done this time
 
@@ -35,9 +38,4 @@
 1. Total ups and downs with adjustable time slider
   - default is "2 weeks"
   - determines times when clusters of ups or downs began or ended and suggests timeframes for "clean slates"
-  - visual relations between the attributes of the actions in aggregate (histograms, timelines, graphs, etc), with groupings by timestamp, tokenized_talk_about_it, level, and/or type.
-
-
-
-
-
+  - visual relations between the attributes of the actions in aggregate (histograms, timelines, graphs, etc), with groupings by timestamp, tokenized_what_happened, level, and/or type.

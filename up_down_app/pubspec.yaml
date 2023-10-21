@@ -5,6 +5,9 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 0.0.1+1
 
+assets:
+  - tflite/
+
 environment:
   sdk: ^3.1.0-0
 
@@ -15,10 +18,14 @@ dependencies:
   english_words: ^4.0.0
   provider: ^6.0.0
   sqflite: ^2.0.0+3
-  path_provider: ^2.0.2
+  path_provider: ^2.1.1
   flutter_rust_bridge: ^1.82.1
   ffi: ^2.1.0
   freezed_annotation: ^2.4.1
+  tflite_flutter: ^0.10.2
+  drift: ^2.13.0
+  sqlite3_flutter_libs: ^0.5.17
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +35,7 @@ dev_dependencies:
   ffigen: ^9.0.1
   build_runner: ^2.4.6
   freezed: ^2.4.3
+  drift_dev: ^2.13.0
 
 flutter:
   uses-material-design: true

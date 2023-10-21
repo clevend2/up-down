@@ -1,0 +1,12 @@
+import "package:up_down_app/data/up_down_action.dart";
+
+CREATE TABLE actions (
+    id $idType INT NOT NULL PRIMARY KEY AUTOINCREMENT,
+    type TEXT,
+    level TEXT NOT NULL,
+    whatHappened TEXT NOT NULL,
+    talkAboutIt TEXT,
+    timestamp DATETIME NOT NULL,
+    device TEXT,
+    tokenizedWhatHappened TEXT,
+) with UpDownAction;

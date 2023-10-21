@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:up_down_app/model/action_levels.dart';
 import 'package:up_down_app/model/action_types.dart';
-import 'package:up_down_app/model/up_down_action.dart';
+import 'package:up_down_app/data/up_down_action.dart';
 
 /// widget that displays inputs for creating a new up_down_action, or takes in an existing action for editing.
 class UpDownActionEditCard extends StatefulWidget {
@@ -13,13 +13,13 @@ class _State extends State<UpDownActionEditCard> {
   final _formKey = GlobalKey<FormState>();
 
   UpDownAction newAction = UpDownAction(
-    level: ActionLevels.usual,
+    level: ActionLevel.usual,
+    whatHappened: '',
     talkAboutIt: '',
-    reallyTalkAboutIt: '',
     timestamp: DateTime.now(),
     device: 'iPhone 12 Pro Max',
-    tokenizedTalkAboutIt: [],
-    type: ActionTypes.down,
+    tokenizedWhatHappened: [],
+    type: ActionType.down,
   );
 
   TextEditingController talkAboutItController = TextEditingController();
@@ -43,7 +43,7 @@ class _State extends State<UpDownActionEditCard> {
                   onPressed: () {
                     // Set the action type
                     setState(() {
-                      action.type = ActionTypes.up;
+                      action.type = ActionType.up;
                     });
                   },
                   child: const Text('Up'),
@@ -55,7 +55,7 @@ class _State extends State<UpDownActionEditCard> {
                   onPressed: () {
                     // Set the action type
                     setState(() {
-                      action.type = ActionTypes.down;
+                      action.type = ActionType.down;
                     });
                   },
                   child: const Text('Down'),

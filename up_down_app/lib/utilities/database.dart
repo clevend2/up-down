@@ -1,39 +1,34 @@
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:drift/drift.dart';
 
-class UpDownDatabase {
-  static final UpDownDatabase instance = UpDownDatabase._init();
 
-  static Database? _database;
+import 'dart:io';
 
-  UpDownDatabase._init();
+import 'package:drift/native.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
+import 'package:up_down_app/data/up_down_action.dart';
 
-  Future<Database> get database async {
-    if (_database != null) return _database!;
+part 'database.g.dart';
 
-    _database = await _initDB('updown.db');
-    return _database!;
-  }
+@DriftDatabase(tables: [UpDownAction])
+class AppDatabase extends _$AppDatabase {
+  AppDatabase() : super(_openConnection());
 
-  Future<Database> _initDB(String filePath) async {
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, filePath);
+  @override
+  int get schemaVersion => 1;
 
-    return await openDatabase(path, version: 1, onCreate: _createDB);
-  }
-
-  Future _createDB(Database db, int version) async {
-    await db.execute('''
-      CREATE TABLE actions(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        level TEXT NOT NULL,
-        talkAboutIt TEXT,
-        reallyTalkAboutIt TEXT,
-        timestamp DATETIME NOT NULL,
-        device TEXT NOT NULL,
-        tokenizedTalkAboutIt TEXT,
-        type TEXT NOT NULL
-      )
-    ''');
-  }
+  selectAllActions() => select(upDownActions).watch();
 }
+
+LazyDatabase _openConnection() {
+  // the LazyDatabase util lets us find the right location for the file async.
+  return LazyDatabase(() async {
+    // put the database file, called db.sqlite here, into the documents folder
+    // for your app.
+    final dbFolder = await getApplicationDocumentsDirectory();
+    final file = File(p.join(dbFolder.path, 'db.sqlite'));
+    return NativeDatabase.createInBackground(file);
+  });
+}
+
+

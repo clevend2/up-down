@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:up_down_app/model/action_levels.dart';
 
-Map<ActionLevels, String> levelNames = {
-  ActionLevels.little: 'Little',
-  ActionLevels.usual: 'Usual',
-  ActionLevels.big: 'Big',
-  ActionLevels.bigbig: 'Big Big',
+Map<ActionLevel, String> levelNames = {
+  ActionLevel.little: 'Little',
+  ActionLevel.usual: 'Usual',
+  ActionLevel.big: 'Big',
+  ActionLevel.bigbig: 'Big Big',
 };
 
 class LevelSelector extends StatelessWidget {
@@ -25,7 +25,7 @@ class LevelSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        for (var i = 0; i < ActionLevels.values.length; i++)
+        for (var i = 0; i < ActionLevel.values.length; i++)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: ElevatedButton(
@@ -35,7 +35,7 @@ class LevelSelector extends StatelessWidget {
                   i == level ? Colors.blue : Colors.grey,
                 ),
               ),
-              child: Text(levelNames[ActionLevels.values[i]]!),
+              child: Text(levelNames[ActionLevel.values[i]]!),
             ),
           ),
       ],

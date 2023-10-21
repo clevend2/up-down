@@ -1,5 +1,5 @@
 /// A class who's constructor ingests a list of UpDownActions and generates insights using various member methods which accept filtering parameters.
-/// The constructor also ingests the tokenized_talk_about_it from each UpDownAction, groups them by keyword, and maps them to the list of actions in which they appear.
+/// The constructor also ingests the tokenized_what_happened from each UpDownAction, groups them by keyword, and maps them to the list of actions in which they appear.
 /// This class is able to ingest chunks of input at a time and process the actions in a streaming fashion to accomodate for large amounts of data.
 /// The current list of insights:
 ///  1. The most common keywords in the actions
@@ -25,13 +25,11 @@
 ///    - `bool includeLevel` - Whether or not to include the level in the search. Defaults to false.
 import 'package:up_down_app/model/action_levels.dart';
 import 'package:up_down_app/model/action_types.dart';
-import 'package:up_down_app/model/up_down_action.dart';
+import 'package:up_down_app/data/up_down_action.dart';
 
 class ActionInsights {
   final List<UpDownAction> actions;
 
   ActionInsights(this.actions);
-
-  extractPartsOfSpeech() {
 
 }

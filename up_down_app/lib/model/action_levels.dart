@@ -1,4 +1,4 @@
-enum ActionLevels {
+enum ActionLevel {
   little,
   usual,
   big,

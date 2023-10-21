@@ -1,4 +1,4 @@
-enum ActionTypes {
+enum ActionType {
   up,
   down
 }
