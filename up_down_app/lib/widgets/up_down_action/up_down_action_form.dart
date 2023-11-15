@@ -6,77 +6,67 @@ import 'package:up_down_app/widgets/up_down_action/talk_about_it_field.dart';
 import 'package:up_down_app/widgets/up_down_action/up_down_selector.dart';
 import 'package:up_down_app/widgets/up_down_action/level_selector.dart';
 import 'package:up_down_app/widgets/up_down_action/what_happened_field.dart';
+import 'package:up_down_app/model/up_down_action_form.dart';
 
-class UpDownActionForm extends StatefulWidget {
-  final UpDownAction initialAction; // Declare the initialAction variable
+class UpDownActionForm extends StatelessWidget {
+  final UpDownActionFormModel model;
 
-  UpDownActionForm({required this.initialAction}); // Add a constructor to initialize initialAction
+  UpDownActionForm({required this.model});
 
-  @override
-  UpDownActionFormState createState() => UpDownActionFormState();
-}
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-class UpDownActionFormState extends State<UpDownActionForm> {
-  final _formKey = GlobalKey<FormState>();
-  late UpDownAction action;
+  final TextEditingController _whatHappenedController = TextEditingController();
 
-  TextEditingController whatHappenedController = TextEditingController();
+  final TextEditingController _talkAboutItController = TextEditingController();
 
-  TextEditingController talkAboutItController = TextEditingController();
-
-  @override
-  void didUpdateWidget(covariant UpDownActionForm oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
+  void handleOnPressed() {
+    if (_formKey.currentState?.validate() ?? false) {
+      _formKey.currentState?.save();
+    } else {
+      throw FlutterError('Form state is not defined.');
+    }
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    action = widget.initialAction.copyWith(); // Initialize action
+  void handleTypeChanged(int index) {
+    model.updateType(ActionType.values[index]);
   }
 
-  void handleLevelChange(ActionLevel newLevel) {
-    setState(() {
-      action.level = newLevel;
-    });
+  void handleLevelChanged(int index) {
+    model.updateLevel(ActionLevel.values[index]);
   }
 
-  void handleUpDownChange(ActionType newValue) {
-    setState(() {
-      type = newValue;
-    });
+  void handleWhatHappenedChange() {
+    /// TODO: update list of recommended previous actions
+    model.updateWhatHappened(_whatHappenedController.text);
+  }
+
+  void handleTalkAboutItChange() {
+    model.updateTalkAboutIt(_talkAboutItController.text);
   }
 
   @override
   Widget build(BuildContext context) {
+    _whatHappenedController.addListener(handleWhatHappenedChange);
+
+    _talkAboutItController.addListener(handleTalkAboutItChange);
+
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
           UpDownSelector(
-            value: type.index,
-            onValueChanged: (int index) {
-              handleUpDownChange(ActionType.values[index]);
-            },
+            value: model.action.type.index,
+            onValueChanged: (int index) => handleTypeChanged(index),
           ),
           LevelSelector(
-            level: level.index,
-            onLevelChanged: (int index) {
-              handleLevelChange(ActionLevel.values[index]);
-            },
+            level: model.action.level.index,
+            onLevelChanged: (int index) => handleLevelChanged(index),
           ),
-          WhatHappenedField(formKey: _formKey, controller: whatHappenedController),
-          TalkAboutItField(formKey: _formKey, controller: talkAboutItController),
+          WhatHappenedField(formKey: _formKey, controller: _whatHappenedController),
+          TalkAboutItField(formKey: _formKey, controller: _talkAboutItController),
           ElevatedButton(
             onPressed: () {
-              if (_formKey.currentState?.validate() ?? false) {
-                // If the form is valid, you might want to save the data
-                _formKey.currentState?.save();
-              } else {
-                throw FlutterError('Form state is not defined.');
-              }
+              handleOnPressed();
             },
             child: Text('Submit'),
           ),

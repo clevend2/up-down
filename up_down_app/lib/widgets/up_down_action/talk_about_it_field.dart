@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:up_down_app/data/up_down_action.dart';
+
 
 /// a text area that expands to fill the entire device screen, with a save button in the bottom corner
 class TalkAboutItField extends StatelessWidget {
   const TalkAboutItField({
     Key? key,
-    required this.action,
     required this.formKey,
     required this.controller,
   }) : super(key: key);
 
   final GlobalKey<FormState> formKey; 
   final TextEditingController controller;
-  final UpDownAction action;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,7 @@ class TalkAboutItField extends StatelessWidget {
                     return null;
                   },
                   onSaved: (value) {
-                    action.talkAboutIt = value;
+                    /// potential steps: format URLs, tokenize, etc.
                   },
                 ),
               ),

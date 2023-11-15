@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:drift/drift.dart' as drift;
 import 'package:up_down_app/model/action_fields.dart';
 import 'package:up_down_app/model/action_levels.dart';
 import 'package:up_down_app/model/action_types.dart';
@@ -16,7 +15,7 @@ class UpDownAction {
   final String? talkAboutIt; // No char max
   final DateTime timestamp;
   final String device; // Device information
-  final List<String>? tokenizedWhatHappened; // List of tokens
+  final String? tokenizedWhatHappened; // List of tokens
 
   UpDownAction({
     this.id,
@@ -47,7 +46,7 @@ class UpDownAction {
     String? talkAboutIt,
     DateTime? timestamp,
     String? device,
-    List<String>? tokenizedWhatHappened,
+    String? tokenizedWhatHappened,
   }) {
     return UpDownAction(
       id: id ?? this.id,

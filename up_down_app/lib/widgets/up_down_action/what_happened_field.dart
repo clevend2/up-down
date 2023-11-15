@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 
 class WhatHappenedField extends StatelessWidget {
   const WhatHappenedField({
-    Key? key,
+    super.key,
     required this.formKey,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final GlobalKey<FormState> formKey; 
   final TextEditingController controller;

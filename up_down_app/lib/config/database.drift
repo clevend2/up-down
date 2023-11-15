@@ -1,9 +1,11 @@
-import "package:up_down_app/data/up_down_action.dart";
+import 'package:up_down_app/data/up_down_action.dart';
+import 'package:up_down_app/model/action_types.dart';
+import 'package:up_down_app/model/action_levels.dart';
 
 CREATE TABLE actions (
-    id $idType INT NOT NULL PRIMARY KEY AUTOINCREMENT,
-    type TEXT,
-    level TEXT NOT NULL,
+    id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
+    type ENUM(ActionType),
+    level ENUM(ActionLevel),
     whatHappened TEXT NOT NULL,
     talkAboutIt TEXT,
     timestamp DATETIME NOT NULL,
